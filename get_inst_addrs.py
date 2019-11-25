@@ -20,4 +20,4 @@ for inst_addr in inst_addrs:
 inst_addrs_json = inst_addrs_json.rstrip(',')
 inst_addrs_json += "\n}"
 
-print inst_addrs_json
+print(inst_addrs_json)

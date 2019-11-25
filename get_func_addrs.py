@@ -17,4 +17,4 @@ for func_addr in func_addrs:
 func_addrs_json = func_addrs_json.rstrip(',')
 func_addrs_json += "\n}"
 
-print func_addrs_json
+print(func_addrs_json)
