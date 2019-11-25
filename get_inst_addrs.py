@@ -14,10 +14,10 @@ for fn in idautils.Functions():
 			inst_addrs.append(inst_addr)
 inst_addrs.sort()
 
-inst_addrs_json = "{"
+inst_addrs_json = "["
 for inst_addr in inst_addrs:
 	inst_addrs_json += "\n\t\"0x%08X\","%(inst_addr)
 inst_addrs_json = inst_addrs_json.rstrip(',')
-inst_addrs_json += "\n}"
+inst_addrs_json += "\n]"
 
 print(inst_addrs_json)
