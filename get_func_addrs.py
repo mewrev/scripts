@@ -5,10 +5,15 @@ import idautils
 #
 # based on: https://reverseengineering.stackexchange.com/a/14726
 func_addrs = []
-for fn in idautils.Functions():
-	#functionName = idc.GetFunctionName(fn)
-	func_addr = fn
-	func_addrs.append(func_addr)
+for seg in idautils.Segments():
+	# Skip extern segment; as used by IDA for external functions.
+	if idc.get_segm_attr(seg, SEGATTR_TYPE) == idc.SEG_XTRN:
+		#print("skipping segment ", idc.get_segm_name(seg))
+		continue
+	for fn in idautils.Functions(seg, SegEnd(seg)):
+		#functionName = idc.GetFunctionName(fn)
+		func_addr = fn
+		func_addrs.append(func_addr)
 func_addrs.sort()
 
 func_addrs_json = "["
