@@ -1,5 +1,5 @@
 import idautils
-#import idc
+import idc
 
 # Locate function addresses.
 #
@@ -11,7 +11,7 @@ for seg in idautils.Segments():
 		#print("skipping segment ", idc.get_segm_name(seg))
 		continue
 	for fn in idautils.Functions(seg, SegEnd(seg)):
-		#functionName = idc.GetFunctionName(fn)
+		#func_name = idc.get_name(fn)
 		func_addr = fn
 		func_addrs.append(func_addr)
 func_addrs.sort()

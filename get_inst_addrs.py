@@ -27,7 +27,7 @@ for seg in idautils.Segments():
 		#print("skipping segment ", idc.get_segm_name(seg))
 		continue
 	for fn in idautils.Functions(seg, SegEnd(seg)):
-		#functionName = idc.GetFunctionName(fn)
+		#func_name = idc.get_name(fn)
 		for (chunk_start, chunk_end) in idautils.Chunks(fn):
 			for head in idautils.Heads(chunk_start, chunk_end):
 				#inst = idc.GetDisasm(head)

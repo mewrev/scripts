@@ -17,7 +17,7 @@ for seg in idautils.Segments():
 		continue
 	for fn in idautils.Functions(seg, SegEnd(seg)):
 		fn_addr = fn
-		#functionName = idc.GetFunctionName(fn)
+		#func_name = idc.get_name(fn)
 		for (chunk_start, chunk_end) in idautils.Chunks(fn):
 			if not chunks.has_key(chunk_start):
 				chunk_size = chunk_end - chunk_start
