@@ -38,31 +38,35 @@ for chunk_start_addr in chunk_start_addrs:
 
 # Example output:
 #
-#    {
-#       "0xDAF0": {
+#    [
+#       {
+#          "chunk_addr": "0xDAF0",
 #          "chunk_size": 331,
 #          "parent_funcs": [
 #             "0xDC70"
 #          ]
 #       },
-#       "0xDC40": {
+#       {
+#          "chunk_addr": "0xDC40",
 #          "chunk_size": 8,
 #          "parent_funcs": [
 #             "0xDC70",
 #          ]
 #       },
-#       "0xDC50": {
+#       {
+#          "chunk_addr": "0xDC50",
 #          "chunk_size": 19,
 #          "parent_funcs": [
 #             "0xDC70"
 #          ]
 #       }
-#    }
-chunks_json = "{"
+#    ]
+chunks_json = "["
 for chunk_start_addr in chunk_start_addrs:
 	chunk = chunks[chunk_start_addr]
 	chunk_size = chunk["chunk_size"]
-	chunks_json += "\n\t\"0x%08X\": {"%(chunk_start_addr)
+	chunks_json += "\n\t{"
+	chunks_json += "\n\t\t\"chunk_addr\": \"0x%08X\","%(chunk_start_addr)
 	chunks_json += "\n\t\t\"chunk_size\": %d,"%(chunk_size)
 	chunks_json += "\n\t\t\"parent_funcs\": ["
 	for parent_func in chunk["parent_funcs"]:
@@ -71,6 +75,6 @@ for chunk_start_addr in chunk_start_addrs:
 	chunks_json += "\n\t\t]"
 	chunks_json += "\n\t},"
 chunks_json = chunks_json.rstrip(',')
-chunks_json += "\n}"
+chunks_json += "\n]"
 
 print(chunks_json)
