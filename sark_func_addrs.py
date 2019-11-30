@@ -4,7 +4,7 @@ import json
 # TODO: remove once we upgrade to Python3.
 def json_ident(v):
 	# indent json output.
-	raw = json.dumps(func_addrs, indent=3)
+	raw = json.dumps(v, indent=3)
 	# convert spaces to tabs.
 	raw = raw.replace("   ", "\t")
 	# remove trailing spaces.
