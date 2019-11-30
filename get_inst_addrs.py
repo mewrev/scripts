@@ -4,6 +4,9 @@ import idc
 # Locate instruction addresses.
 #
 # based on: https://reverseengineering.stackexchange.com/a/14726
+
+# Use hash map to only record each instruction address once.
+insts = {}
 inst_addrs = []
 for seg in idautils.Segments():
 	# Skip extern segment; as used by IDA for external functions.
@@ -32,7 +35,10 @@ for seg in idautils.Segments():
 			for head in idautils.Heads(chunk_start, chunk_end):
 				#inst = idc.GetDisasm(head)
 				inst_addr = head
-				inst_addrs.append(inst_addr)
+				insts[inst_addr] = True
+
+for inst_addr in insts:
+	inst_addrs.append(inst_addr)
 inst_addrs.sort()
 
 inst_addrs_json = "["
