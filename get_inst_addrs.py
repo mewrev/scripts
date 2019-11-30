@@ -33,6 +33,11 @@ for seg in idautils.Segments():
 		#func_name = idc.get_name(fn)
 		for (chunk_start, chunk_end) in idautils.Chunks(fn):
 			for head in idautils.Heads(chunk_start, chunk_end):
+				flags = idc.GetFlags(head)
+				if not is_code(flags):
+					# Skip non-code heads. These may appear in functions containing
+					# inlined jump tables or alignment directives.
+					continue
 				#inst = idc.GetDisasm(head)
 				inst_addr = head
 				insts[inst_addr] = True
