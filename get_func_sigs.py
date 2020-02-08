@@ -14,7 +14,7 @@ for seg in idautils.Segments():
 	if idc.get_segm_attr(seg, SEGATTR_TYPE) == idc.SEG_XTRN:
 		#print("skipping segment ", idc.get_segm_name(seg))
 		continue
-	for fn in idautils.Functions(seg, SegEnd(seg)):
+	for fn in idautils.Functions(seg, idc.get_segm_end(seg)):
 		func_addr = fn
 		func_name = idc.get_name(func_addr)
 		if func_name is None:

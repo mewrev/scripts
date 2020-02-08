@@ -29,11 +29,11 @@ for seg in idautils.Segments():
 	if idc.get_segm_attr(seg, SEGATTR_TYPE) == idc.SEG_XTRN:
 		#print("skipping segment ", idc.get_segm_name(seg))
 		continue
-	for fn in idautils.Functions(seg, SegEnd(seg)):
+	for fn in idautils.Functions(seg, idc.get_segm_end(seg)):
 		#func_name = idc.get_name(fn)
 		for (chunk_start, chunk_end) in idautils.Chunks(fn):
 			for head in idautils.Heads(chunk_start, chunk_end):
-				flags = idc.GetFlags(head)
+				flags = idc.get_full_flags(head)
 				if not is_code(flags):
 					# Skip non-code heads. These may appear in functions containing
 					# inlined jump tables or alignment directives.

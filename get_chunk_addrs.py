@@ -15,11 +15,11 @@ for seg in idautils.Segments():
 	if idc.get_segm_attr(seg, SEGATTR_TYPE) == idc.SEG_XTRN:
 		#print("skipping segment ", idc.get_segm_name(seg))
 		continue
-	for fn in idautils.Functions(seg, SegEnd(seg)):
+	for fn in idautils.Functions(seg, idc.get_segm_end(seg)):
 		fn_addr = fn
 		#func_name = idc.get_name(fn)
 		for (chunk_start, chunk_end) in idautils.Chunks(fn):
-			if not chunks.has_key(chunk_start):
+			if not chunk_start in chunks:
 				chunk_size = chunk_end - chunk_start
 				chunks[chunk_start] = {"chunk_size": chunk_size, "parent_funcs": []}
 			chunks[chunk_start]["parent_funcs"].append(fn_addr)
